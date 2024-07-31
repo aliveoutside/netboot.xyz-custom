@@ -1,12 +1,20 @@
 #!ipxe
 ###
-### netboot.xyz-custom menu
+### netboot.xyz-custom menu example
 ###
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+set fedora https://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os
 
-:custom_exit
-exit 0
+:menu
+menu shim transparent loader demo
+item option_one    Load Fedora Everything
+item exit          Exit
+choose option && goto ${option}
+
+:fedora
+kernel ${fedora}/images/pxeboot/vmlinuz initrd=initrd.img repo=${fedora}
+initrd ${fedora}/images/pxeboot/initrd.img
+boot
+
+:exit
+exit
