@@ -5,7 +5,7 @@
 
 isset ${dhcp-server} && set ipparam ip=dhcp || set ipparam ip=${ip}::${gateway}:${netmask}:::none nameserver=${dns}
 set ipparam BOOTIF=${netX/mac} ${ipparam}
-set fedora_base_mirror=https://mirror.yandex.ru/fedora/linux
+set fedora_base_dir=https://mirror.yandex.ru/fedora/linux
 
 goto ${menu} ||
 
