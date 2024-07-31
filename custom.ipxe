@@ -3,7 +3,7 @@
 ### netboot.xyz-custom menu example
 ###
 
-set fedora https://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os
+set fedora http://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os
 
 :menu
 menu shim transparent loader demo
