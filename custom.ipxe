@@ -1,26 +1,27 @@
 #!ipxe
-###
+
 ### netboot.xyz-custom menu example
-###
 
-set fedora http://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os
-
-isset ${dhcp-server} && set ipparam ip=dhcp || set ipparam ip=${ip}::${gateway}:${netmask}:::none nameserver=${dns}
-set ipparam BOOTIF=${netX/mac} ${ipparam}
-
+set fedora_base http://mirror.yandex.ru/fedora/linux/releases
+set osversion 40
+set sku_type Everything
 set os_arch ${arch}
 iseq ${os_arch} x86_64 && set os_arch x86_64 ||
 iseq ${os_arch} arm64 && set os_arch aarch64 ||
 
+isset ${dhcp-server} && set ipparam ip=dhcp || set ipparam ip=${ip}::${gateway}:${netmask}:::none nameserver=${dns}
+set ipparam BOOTIF=${netX/mac} ${ipparam}
+
 :menu
-menu shim transparent loader demo
-item fedora        Load Fedora Everything
-item exit          Exit
-choose option && goto fedora
+menu Fedora ${osversion} - ${os_arch}
+item fedora Load Fedora ${osversion} ${sku_type}
+item exit Exit
+choose option && goto ${option}
 
 :fedora
-kernel ${fedora}/images/pxeboot/vmlinuz initrd=initrd.magic inst.repo=${fedora} ${params} ${ipparam} inst.graphical ${cmdline}
-initrd ${fedora}/images/pxeboot/initrd.img
+imgfree
+kernel ${fedora_base}/${osversion}/${sku_type}/${os_arch}/os/images/pxeboot/vmlinuz inst.repo=${fedora_base}/${osversion}/${sku_type}/${os_arch}/os ${params} ${ipparam} inst.graphical ${cmdline}
+initrd ${fedora_base}/${osversion}/${sku_type}/${os_arch}/os/images/pxeboot/initrd.img
 boot
 
 :exit
