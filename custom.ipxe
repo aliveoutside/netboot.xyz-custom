@@ -7,7 +7,7 @@ set fedora https://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/o
 
 :menu
 menu shim transparent loader demo
-item option_one    Load Fedora Everything
+item fedora        Load Fedora Everything
 item exit          Exit
 choose option && goto ${option}
 
