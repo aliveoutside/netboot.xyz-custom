@@ -3,7 +3,7 @@
 ### netboot.xyz-custom menu example
 ###
 
-set fedora http://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os
+set fedora https://mirror.yandex.ru/fedora/linux/releases/40/Everything/x86_64/os/images/pxeboot
 
 :menu
 menu shim transparent loader demo
@@ -12,8 +12,8 @@ item exit          Exit
 choose option && goto ${option}
 
 :fedora
-kernel ${fedora}/images/pxeboot/vmlinuz initrd=initrd.img repo=${fedora}
-initrd ${fedora}/images/pxeboot/initrd.img
+kernel ${fedora}/vmlinuz initrd=initrd.img repo=${fedora}
+initrd ${fedora}/initrd.img
 boot
 
 :exit
